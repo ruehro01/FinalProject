@@ -1,36 +1,29 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Choropleth Map</title>
-        <link rel="shortcut icon" type="image/png" href="img/favicon.png">
-        <!--main stylesheet-->
-		<link rel="stylesheet" href="css/style.css" />
-    </head>
+<head>
+    <title>Average Monthly Rainfall by Major U.S. City</title>	
+
+<!--stylesheets-->
+<link rel="stylesheet" type="text/css" href="css/leaflet.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" type="text/css" rel="stylesheet"> <!-- from Google fonts -->
+
+</head>
+<body>
+    <h1>Average Monthly Rainfall by Major U.S. City</h1>
+    <div id='map'></div>
+    <div id='panel'></div>
+    <h2>What do rainfall trends look like across the U.S. over the course of a year?</h2>
+    <p>The United States has a wide array of climates and weather patterns. Part of this can be attributed to differences in latitude often primarily, but other things like the geographical features of a region play a large role as well. 
     
-    <body>
-        <!--libraries-->
-        <script src="lib/d3.v4.5.js"></script>
-        <script src="lib/topojson.js"></script>
-        <script src="lib/queue.js"></script>
+    The above topographic basemap shows features like forests in green and offers shaded relief as the user zooms in. Utilize the zoom and pan features to explore the United States! After you've explored some of the different geographic regions of the United States, give the time slider a try to see how rainfall patterns occur in different major cities in the U.S. over the course of the year. <b>Happy exploring! </b>
+    </p>
+    
+    <!--scripts-->
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script src="js/leaflet.js" type="text/javascript"></script>
+    <script src="data/rainfall.json"></script> <!-- link to GeoJSON file we want to load into map -->
+    <script src="js/main.js"></script>
 
-        <!-- Dropdown div -->
-        <div id="option"></div>
-
-        <!-- Map Description panel -->
-        <fieldset id="description">
-            <legend>Description</legend>
-            <p><b>With the publication of much of the U.S. Census data from the 2020 census, it is worth taking a look at some of the demographic trends since 2010.</b><br><br> 
-                As a whole, the United States has grown in population since 2010; by 19.5 million according to the U.S. Census Bureau. <b>Use the dropdown menu above</b> to show different kinds of census data on the map. As you may notice, the rate of population change actually decreases in a few states, meaning those states saw a decline in their population over the last decade. <b>The chart below</b> reflects these negative values with an orange bar that goes the opposite direction on the X axis. <br><br>Play around with the data using the dropdown. <b>What trends do you observe?</b><br><br><br><br><i>Data source: Census.gov, Natural Earth</i></p>
-        </fieldset>
-
-        <!-- US States Map -->
-        <div id="map"></div>
-
-        <!-- Chart -->
-        <svg id="chart"></svg>
-        
-        <!--link to main javascript file-->
-        <script src="js/main.js"></script>
-    </body>
+</body>
 </html>

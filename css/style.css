@@ -1,0 +1,28 @@
+
+html, body {
+    height: 100%;
+    width: 100%;
+    font-family: 'Roboto Condense d', sans-serif;
+    }
+
+.leaflet-popup-content p {
+    margin: 0.2em 0;
+}
+
+ #map {
+    height: 80%;
+    width: 100%;
+    display: inline-block;
+}
+
+.range-slider {
+    width: 90%;
+}
+
+#forward {
+    float: right;
+}
+
+#reverse {
+    float: left;
+}

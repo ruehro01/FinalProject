@@ -1,0 +1,455 @@
+{
+  "type" : "FeatureCollection",
+  "features" : [
+    {
+      "type" : "Feature",
+      "id" : 1,
+      "geometry" : {
+        "type" : "Point",
+        "coordinates" : [
+          -122.33209999999997,
+          47.606200000000058
+        ]
+      },
+      "properties" : {
+        "OBJECTID" : 1,
+        "id" : 1,
+        "name" : "Seattle",
+        "latitude" : 47.606200000000001,
+        "longitude" : -122.3321,
+        "Rain_Jan" : 5.2400000000000002,
+        "Rain_Feb" : 4.0899999999999999,
+        "Rain_Mar" : 3.9199999999999999,
+        "Rain_Apr" : 2.75,
+        "Rain_May" : 2.0299999999999998,
+        "Rain_Jun" : 1.55,
+        "Rain_Jul" : 0.93000000000000005,
+        "Rain_Aug" : 1.1599999999999999,
+        "Rain_Sep" : 1.6100000000000001,
+        "Rain_Oct" : 3.2400000000000002,
+        "Rain_Nov" : 5.6699999999999999,
+        "Rain_Dec" : 6.0599999999999996
+      }
+    },
+    {
+      "type" : "Feature",
+      "id" : 2,
+      "geometry" : {
+        "type" : "Point",
+        "coordinates" : [
+          -122.67499999999995,
+          45.505100000000027
+        ]
+      },
+      "properties" : {
+        "OBJECTID" : 2,
+        "id" : 2,
+        "name" : "Portland",
+        "latitude" : 45.505099999999999,
+        "longitude" : -122.675,
+        "Rain_Jan" : 5.4000000000000004,
+        "Rain_Feb" : 3.8999999999999999,
+        "Rain_Mar" : 3.6000000000000001,
+        "Rain_Apr" : 2.3999999999999999,
+        "Rain_May" : 2.1000000000000001,
+        "Rain_Jun" : 1.5,
+        "Rain_Jul" : 0.59999999999999998,
+        "Rain_Aug" : 1.1000000000000001,
+        "Rain_Sep" : 1.8,
+        "Rain_Oct" : 2.7000000000000002,
+        "Rain_Nov" : 5.2999999999999998,
+        "Rain_Dec" : 6.0999999999999996
+      }
+    },
+    {
+      "type" : "Feature",
+      "id" : 3,
+      "geometry" : {
+        "type" : "Point",
+        "coordinates" : [
+          -122.41939999999994,
+          37.774900000000059
+        ]
+      },
+      "properties" : {
+        "OBJECTID" : 3,
+        "id" : 3,
+        "name" : "San Francisco",
+        "latitude" : 37.774900000000002,
+        "longitude" : -122.4194,
+        "Rain_Jan" : 4.7199999999999998,
+        "Rain_Feb" : 4.1500000000000004,
+        "Rain_Mar" : 3.3999999999999999,
+        "Rain_Apr" : 1.25,
+        "Rain_May" : 0.54000000000000004,
+        "Rain_Jun" : 0.13,
+        "Rain_Jul" : 0.040000000000000001,
+        "Rain_Aug" : 0.089999999999999997,
+        "Rain_Sep" : 0.28000000000000003,
+        "Rain_Oct" : 1.1899999999999999,
+        "Rain_Nov" : 3.3100000000000001,
+        "Rain_Dec" : 3.1800000000000002
+      }
+    },
+    {
+      "type" : "Feature",
+      "id" : 4,
+      "geometry" : {
+        "type" : "Point",
+        "coordinates" : [
+          -118.24369999999999,
+          34.052200000000028
+        ]
+      },
+      "properties" : {
+        "OBJECTID" : 4,
+        "id" : 4,
+        "name" : "Los Angeles",
+        "latitude" : 34.052199999999999,
+        "longitude" : -118.2437,
+        "Rain_Jan" : 3.3300000000000001,
+        "Rain_Feb" : 3.6800000000000002,
+        "Rain_Mar" : 3.1400000000000001,
+        "Rain_Apr" : 0.82999999999999996,
+        "Rain_May" : 0.31,
+        "Rain_Jun" : 0.059999999999999998,
+        "Rain_Jul" : 0.01,
+        "Rain_Aug" : 0.13,
+        "Rain_Sep" : 0.32000000000000001,
+        "Rain_Oct" : 0.37,
+        "Rain_Nov" : 1.05,
+        "Rain_Dec" : 1.9099999999999999
+      }
+    },
+    {
+      "type" : "Feature",
+      "id" : 5,
+      "geometry" : {
+        "type" : "Point",
+        "coordinates" : [
+          -115.13979999999998,
+          36.169900000000041
+        ]
+      },
+      "properties" : {
+        "OBJECTID" : 5,
+        "id" : 5,
+        "name" : "Las Vegas",
+        "latitude" : 36.169899999999998,
+        "longitude" : -115.13979999999999,
+        "Rain_Jan" : 0.58999999999999997,
+        "Rain_Feb" : 0.68999999999999995,
+        "Rain_Mar" : 0.58999999999999997,
+        "Rain_Apr" : 0.14999999999999999,
+        "Rain_May" : 0.23999999999999999,
+        "Rain_Jun" : 0.080000000000000002,
+        "Rain_Jul" : 0.44,
+        "Rain_Aug" : 0.45000000000000001,
+        "Rain_Sep" : 0.31,
+        "Rain_Oct" : 0.23999999999999999,
+        "Rain_Nov" : 0.31,
+        "Rain_Dec" : 0.40000000000000002
+      }
+    },
+    {
+      "type" : "Feature",
+      "id" : 6,
+      "geometry" : {
+        "type" : "Point",
+        "coordinates" : [
+          -104.99029999999999,
+          39.739200000000039
+        ]
+      },
+      "properties" : {
+        "OBJECTID" : 6,
+        "id" : 6,
+        "name" : "Denver",
+        "latitude" : 39.739199999999997,
+        "longitude" : -104.9903,
+        "Rain_Jan" : 0.51000000000000001,
+        "Rain_Feb" : 0.48999999999999999,
+        "Rain_Mar" : 1.28,
+        "Rain_Apr" : 1.9299999999999999,
+        "Rain_May" : 2.3199999999999998,
+        "Rain_Jun" : 1.5600000000000001,
+        "Rain_Jul" : 2.1600000000000001,
+        "Rain_Aug" : 1.8200000000000001,
+        "Rain_Sep" : 1.1399999999999999,
+        "Rain_Oct" : 0.98999999999999999,
+        "Rain_Nov" : 0.97999999999999998,
+        "Rain_Dec" : 0.63
+      }
+    },
+    {
+      "type" : "Feature",
+      "id" : 7,
+      "geometry" : {
+        "type" : "Point",
+        "coordinates" : [
+          -93.264999999999986,
+          44.977800000000059
+        ]
+      },
+      "properties" : {
+        "OBJECTID" : 7,
+        "id" : 7,
+        "name" : "Minneapolis",
+        "latitude" : 44.977800000000002,
+        "longitude" : -93.265000000000001,
+        "Rain_Jan" : 1.04,
+        "Rain_Feb" : 0.79000000000000004,
+        "Rain_Mar" : 1.8600000000000001,
+        "Rain_Apr" : 2.3100000000000001,
+        "Rain_May" : 3.2400000000000002,
+        "Rain_Jun" : 4.3399999999999999,
+        "Rain_Jul" : 4.04,
+        "Rain_Aug" : 4.0499999999999998,
+        "Rain_Sep" : 2.6899999999999999,
+        "Rain_Oct" : 2.1099999999999999,
+        "Rain_Nov" : 1.9399999999999999,
+        "Rain_Dec" : 1
+      }
+    },
+    {
+      "type" : "Feature",
+      "id" : 8,
+      "geometry" : {
+        "type" : "Point",
+        "coordinates" : [
+          -87.906499999999937,
+          43.038900000000069
+        ]
+      },
+      "properties" : {
+        "OBJECTID" : 8,
+        "id" : 8,
+        "name" : "Milwaukee",
+        "latitude" : 43.038899999999998,
+        "longitude" : -87.906499999999994,
+        "Rain_Jan" : 1.8500000000000001,
+        "Rain_Feb" : 1.6499999999999999,
+        "Rain_Mar" : 2.5899999999999999,
+        "Rain_Apr" : 3.7799999999999998,
+        "Rain_May" : 3.0600000000000001,
+        "Rain_Jun" : 3.5600000000000001,
+        "Rain_Jul" : 3.5800000000000001,
+        "Rain_Aug" : 4.0300000000000002,
+        "Rain_Sep" : 3.2999999999999998,
+        "Rain_Oct" : 2.4900000000000002,
+        "Rain_Nov" : 2.7000000000000002,
+        "Rain_Dec" : 2.2200000000000002
+      }
+    },
+    {
+      "type" : "Feature",
+      "id" : 9,
+      "geometry" : {
+        "type" : "Point",
+        "coordinates" : [
+          -98.493599999999958,
+          29.424100000000067
+        ]
+      },
+      "properties" : {
+        "OBJECTID" : 9,
+        "id" : 9,
+        "name" : "San Antonio",
+        "latitude" : 29.424099999999999,
+        "longitude" : -98.493600000000001,
+        "Rain_Jan" : 1.6599999999999999,
+        "Rain_Feb" : 1.75,
+        "Rain_Mar" : 1.8899999999999999,
+        "Rain_Apr" : 2.6000000000000001,
+        "Rain_May" : 4.7199999999999998,
+        "Rain_Jun" : 4.2999999999999998,
+        "Rain_Jul" : 2.0299999999999998,
+        "Rain_Aug" : 2.5699999999999998,
+        "Rain_Sep" : 3,
+        "Rain_Oct" : 3.8599999999999999,
+        "Rain_Nov" : 2.5800000000000001,
+        "Rain_Dec" : 1.96
+      }
+    },
+    {
+      "type" : "Feature",
+      "id" : 10,
+      "geometry" : {
+        "type" : "Point",
+        "coordinates" : [
+          -77.036899999999946,
+          38.907200000000046
+        ]
+      },
+      "properties" : {
+        "OBJECTID" : 10,
+        "id" : 10,
+        "name" : "Washington",
+        "latitude" : 38.907200000000003,
+        "longitude" : -77.036900000000003,
+        "Rain_Jan" : 3.21,
+        "Rain_Feb" : 2.6299999999999999,
+        "Rain_Mar" : 3.6000000000000001,
+        "Rain_Apr" : 2.77,
+        "Rain_May" : 3.8199999999999998,
+        "Rain_Jun" : 3.1299999999999999,
+        "Rain_Jul" : 3.6600000000000001,
+        "Rain_Aug" : 3.4399999999999999,
+        "Rain_Sep" : 3.79,
+        "Rain_Oct" : 3.2200000000000002,
+        "Rain_Nov" : 3.0299999999999998,
+        "Rain_Dec" : 3.0499999999999998
+      }
+    },
+    {
+      "type" : "Feature",
+      "id" : 11,
+      "geometry" : {
+        "type" : "Point",
+        "coordinates" : [
+          -74.005999999999972,
+          40.712800000000072
+        ]
+      },
+      "properties" : {
+        "OBJECTID" : 11,
+        "id" : 11,
+        "name" : "New York",
+        "latitude" : 40.712800000000001,
+        "longitude" : -74.006,
+        "Rain_Jan" : 4.1299999999999999,
+        "Rain_Feb" : 3.1499999999999999,
+        "Rain_Mar" : 4.3700000000000001,
+        "Rain_Apr" : 4.2800000000000002,
+        "Rain_May" : 4.6900000000000004,
+        "Rain_Jun" : 3.8399999999999999,
+        "Rain_Jul" : 4.6200000000000001,
+        "Rain_Aug" : 4.2199999999999998,
+        "Rain_Sep" : 4.2300000000000004,
+        "Rain_Oct" : 3.8500000000000001,
+        "Rain_Nov" : 4.3600000000000003,
+        "Rain_Dec" : 3.9500000000000002
+      }
+    },
+    {
+      "type" : "Feature",
+      "id" : 12,
+      "geometry" : {
+        "type" : "Point",
+        "coordinates" : [
+          -80.191799999999944,
+          25.761700000000076
+        ]
+      },
+      "properties" : {
+        "OBJECTID" : 12,
+        "id" : 12,
+        "name" : "Miami",
+        "latitude" : 25.761700000000001,
+        "longitude" : -80.191800000000001,
+        "Rain_Jan" : 1.8799999999999999,
+        "Rain_Feb" : 2.0699999999999998,
+        "Rain_Mar" : 2.5600000000000001,
+        "Rain_Apr" : 3.3599999999999999,
+        "Rain_May" : 5.5199999999999996,
+        "Rain_Jun" : 8.5399999999999991,
+        "Rain_Jul" : 5.79,
+        "Rain_Aug" : 8.6300000000000008,
+        "Rain_Sep" : 8.3800000000000008,
+        "Rain_Oct" : 6.1900000000000004,
+        "Rain_Nov" : 3.4300000000000002,
+        "Rain_Dec" : 2.1800000000000002
+      }
+    },
+    {
+      "type" : "Feature",
+      "id" : 13,
+      "geometry" : {
+        "type" : "Point",
+        "coordinates" : [
+          -111.89099999999996,
+          40.760800000000074
+        ]
+      },
+      "properties" : {
+        "OBJECTID" : 13,
+        "id" : 13,
+        "name" : "Salt Lake City",
+        "latitude" : 40.760800000000003,
+        "longitude" : -111.89100000000001,
+        "Rain_Jan" : 1.3700000000000001,
+        "Rain_Feb" : 1.3300000000000001,
+        "Rain_Mar" : 1.9099999999999999,
+        "Rain_Apr" : 2.02,
+        "Rain_May" : 2.0899999999999999,
+        "Rain_Jun" : 0.77000000000000002,
+        "Rain_Jul" : 0.71999999999999997,
+        "Rain_Aug" : 0.76000000000000001,
+        "Rain_Sep" : 1.3300000000000001,
+        "Rain_Oct" : 1.5700000000000001,
+        "Rain_Nov" : 1.3999999999999999,
+        "Rain_Dec" : 1.23
+      }
+    },
+    {
+      "type" : "Feature",
+      "id" : 14,
+      "geometry" : {
+        "type" : "Point",
+        "coordinates" : [
+          -86.781599999999969,
+          36.162700000000029
+        ]
+      },
+      "properties" : {
+        "OBJECTID" : 14,
+        "id" : 14,
+        "name" : "Nashville",
+        "latitude" : 36.162700000000001,
+        "longitude" : -86.781599999999997,
+        "Rain_Jan" : 3.9700000000000002,
+        "Rain_Feb" : 3.6899999999999999,
+        "Rain_Mar" : 4.8700000000000001,
+        "Rain_Apr" : 3.9300000000000002,
+        "Rain_May" : 5.0700000000000003,
+        "Rain_Jun" : 4.0800000000000001,
+        "Rain_Jul" : 3.77,
+        "Rain_Aug" : 3.2799999999999998,
+        "Rain_Sep" : 3.5899999999999999,
+        "Rain_Oct" : 2.8700000000000001,
+        "Rain_Nov" : 4.4500000000000002,
+        "Rain_Dec" : 4.54
+      }
+    },
+    {
+      "type" : "Feature",
+      "id" : 15,
+      "geometry" : {
+        "type" : "Point",
+        "coordinates" : [
+          -86.15809999999999,
+          39.768400000000042
+        ]
+      },
+      "properties" : {
+        "OBJECTID" : 15,
+        "id" : 15,
+        "name" : "Indianapolis",
+        "latitude" : 39.7684,
+        "longitude" : -86.158100000000005,
+        "Rain_Jan" : 2.48,
+        "Rain_Feb" : 2.4100000000000001,
+        "Rain_Mar" : 3.4399999999999999,
+        "Rain_Apr" : 3.6099999999999999,
+        "Rain_May" : 4.3499999999999996,
+        "Rain_Jun" : 4.1299999999999999,
+        "Rain_Jul" : 4.4199999999999999,
+        "Rain_Aug" : 3.8199999999999998,
+        "Rain_Sep" : 2.8799999999999999,
+        "Rain_Oct" : 2.7599999999999998,
+        "Rain_Nov" : 3.6099999999999999,
+        "Rain_Dec" : 3.0299999999999998
+      }
+    }
+  ]
+}
