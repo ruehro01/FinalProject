@@ -1,0 +1,13 @@
+.portfolio-thumbnail {
+	background-color: yellow;
+	border-width: 4px;
+	border-style: solid;
+	border-color: green;
+}
+
+.portfolio-thumbnail {
+  background-color: #fff;
+  border-color: #863ee3;
+  border-width: 1px;
+  width: 95%;
+}

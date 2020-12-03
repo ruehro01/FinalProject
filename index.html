@@ -1,29 +1,62 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Average Monthly Rainfall by Major U.S. City</title>	
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<meta name="keywords" content="maps, cartography"/>
+		<title>Ross Ruehmann</title>
 
-<!--stylesheets-->
-<link rel="stylesheet" type="text/css" href="css/leaflet.css"/>
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" type="text/css" rel="stylesheet"> <!-- from Google fonts -->
+		<!--stylesheets-->
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="css/leaflet.css"/>
+		<link rel="stylesheet" href="css/style.css">
+	</head>
 
-</head>
-<body>
-    <h1>Average Monthly Rainfall by Major U.S. City</h1>
-    <div id='map'></div>
-    <div id='panel'></div>
-    <h2>What do rainfall trends look like across the U.S. over the course of a year?</h2>
-    <p>The United States has a wide array of climates and weather patterns. Part of this can be attributed to differences in latitude often primarily, but other things like the geographical features of a region play a large role as well. 
-    
-    The above topographic basemap shows features like forests in green and offers shaded relief as the user zooms in. Utilize the zoom and pan features to explore the United States! After you've explored some of the different geographic regions of the United States, give the time slider a try to see how rainfall patterns occur in different major cities in the U.S. over the course of the year. <b>Happy exploring! </b>
-    </p>
-    
-    <!--scripts-->
-    <script src="js/jquery.js" type="text/javascript"></script>
-    <script src="js/leaflet.js" type="text/javascript"></script>
-    <script src="data/rainfall.json"></script> <!-- link to GeoJSON file we want to load into map -->
-    <script src="js/main.js"></script>
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top"> <!-- Creates the navbar -->
+		  <div class="container">
+		    <div class="navbar-header"> <!-- Creates the navbar header -->
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span> <!-- Used for screen readers for accessibility -->
+						<span class="glyphicon glyphicon-menu-hamburger"></span>
+						<span class="menu"> Menu</span>
+					</button> <!-- Hamburger button for smaller devices -->
+					<a class="navbar-brand" href="#">Historical Wildfire</a> <!-- Your website brand name -->
+		    </div>
 
-</body>
+		    <div id="navbar" class="collapse navbar-collapse"> <!-- Links to include in navbar -->
+		      <ul class="nav navbar-nav">  <!-- Unordered list for links on navbar -->
+		        <li><a href="history.html">History</a></li>
+						<li><a href="concern.html">Concern</a></li>
+                                <li><a href="support.html">Support</a></li>
+		        <li><a href="about.html">About</a></li>
+		      </ul>
+		    </div> <!-- end .navbar-collapse -->
+		  </div> <!-- end .container -->
+		</nav> <!-- end navigation bar -->
+
+		<div class="jumbotron">
+			<div class="container">
+				<h2>Wildland Fires in the United States</h2>
+				<h4><b>Historical Data</b></h4>
+			</div>
+		</div>
+        
+        <div id='map'></div>
+        <div id='panel'></div>
+        <h2>What do rainfall trends look like across the U.S. over the course of a year?</h2>
+        <p>The United States has a wide array of climates and weather patterns. Part of this can be attributed to differences in latitude often primarily, but other things like the geographical features of a region play a large role as well. 
+
+        The above topographic basemap shows features like forests in green and offers shaded relief as the user zooms in. Utilize the zoom and pan features to explore the United States! After you've explored some of the different geographic regions of the United States, give the time slider a try to see how rainfall patterns occur in different major cities in the U.S. over the course of the year. <b>Happy exploring! </b>
+        </p>
+
+
+		<!--put your external script links here-->
+        <script src="js/jquery.js" type="text/javascript"></script>
+        <script src="js/leaflet.js" type="text/javascript"></script>
+        <script src="data/rainfall.json"></script> <!-- link to GeoJSON file we want to load into map -->
+        <script src="js/main.js"></script>
+		<script type="text/javascript" src="lib/bootstrap.min.js"></script>
+	</body>
 </html>

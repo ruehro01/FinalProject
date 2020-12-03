@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Ross Ruehmann</title>
+		<!-- <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'> -->
+
+		<!--put your Bootstrap stylesheet links below this comment and above style.css-->
+		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="../css/style.css">
+		<!--[if IE<9]>
+			<link rel="stylesheet" href="css/style.ie.css">
+		<![endif]-->
+	</head>
+
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top"> <!-- Creates the navbar -->
+		  <div class="container">
+		    <div class="navbar-header"> <!-- Creates the navbar header -->
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+		        <span class="sr-only">Toggle navigation</span> <!-- Used for screen readers for accessibility -->
+						<span class="glyphicon glyphicon-menu-hamburger"></span><span class="menu"> Menu</span>
+		      </button> <!-- Hamburger button for smaller devices -->
+					<a class="navbar-brand" href="../index.html">Ross Ruehmann</a> <!-- Your website brand name -->
+		    </div>
+
+		    <div id="navbar" class="collapse navbar-collapse"> <!-- Links to include in navbar -->
+		      <ul class="nav navbar-nav">  <!-- Unordered list for links on navbar -->
+		        <li><a href="../about.html">About</a></li>
+						<li><a href="../resume.html">Resume</a></li>
+		        <li><a href="../contact.html">Contact</a></li>
+		      </ul>
+		    </div> <!-- end .navbar-collapse -->
+		  </div> <!-- end .container -->
+		</nav> <!-- end navigation bar -->
+
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
+					<h2 class="portfolio-title">Wildfires in Glacier National Park</h2>
+					<p class="portfolio-description">
+						Over the course of my life, I have been to Glacier National Park numerous times and consider it one of my favorite places in the country. In recent years in particular, the Western United States have been ravaged by wildfires during the drier seasons and Glacier National Park has seen their fair share. As part of one of my first GIS courses, I needed to create my own map about something that interested me. As a result, I spent a good amount of time researching Glacier National Park and exploring what vector data was available. One thing there was no shortage of was wildfire data, so I chose to compare the 20th and 21st centuries in terms of wildfire prevalence and severity. It was the first time I had created any map using DEM and a transparency to create a 3D effect. This map was also my first experience playing with masks to highlight the focal point of the map and push the rest into the background.
+					</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 portfolio-image">
+					<a href="../assets/GlacierNationalPark.jpg"><img src="../assets/GlacierNationalPark.jpg" alt="Wildfires in Glacier National Park" class="center-block img-responsive"/></a>
+				</div>
+			</div>
+		</div>
+
+		<!--put your external script links here-->
+		<script type="text/javascript" src="../lib/jquery-1.11.3.js"></script>
+		<script type="text/javascript" src="../lib/bootstrap.min.js"></script>
+	</body>
+</html>
