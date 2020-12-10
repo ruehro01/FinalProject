@@ -101,30 +101,57 @@ a:hover {
   color: black
 }
 
+
 html, body {
     height: 100%;
     width: 100%;
     font-family: 'Roboto Condense d', sans-serif;
-    }
+}
 
 .leaflet-popup-content p {
     margin: 0.2em 0;
 }
 
- #map {
+#fires {
+    color: "#8900ff";
+    outline-color: "#000";
+    outline-width: medium;
+    opacity: 1;
+}
+
+#map {
     height: 80%;
-    width: 100%;
-    display: inline-block;
-}
-
-.range-slider {
-    width: 90%;
-}
-
-#forward {
-    float: right;
-}
-
-#reverse {
+    width: 80%;
     float: left;
 }
+
+#dropdown {
+    float: left;
+    margin-left: 1%;
+    width: 18%;
+}
+
+    #dropdown select {
+        width: 100%;
+    }
+
+    #dropdown fieldset {
+        border-color: #ccc;
+    }
+
+#panel {
+    width: 80%;
+    clear: both;
+}
+
+    #panel .range-slider {
+        width: 90%;
+    }
+
+    #panel #reverse {
+        float: left;
+    }
+
+    #panel #forward {
+        float: right;
+    }

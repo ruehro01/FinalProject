@@ -4,13 +4,15 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<meta name="keywords" content="maps, cartography"/>
-		<title>Ross Ruehmann</title>
+		<title>Historical Wildfire Data for the United States</title>
 
 		<!--stylesheets-->
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" type="text/css" href="css/leaflet.css"/>
 		<link rel="stylesheet" href="css/style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" type="text/css" rel="stylesheet"> <!-- from Google fonts -->
+
 	</head>
 
 	<body>
@@ -44,6 +46,27 @@
 		</div>
         
         <div id='map'></div>
+        <div id="dropdown">
+            <fieldset>
+                <legend>Select Filter</legend>
+                <select id="selState">
+                    <option value="">All States</option>
+                </select>
+                <br /><br />
+                <select id="selDecade">
+                    <option value="">All Decades</option>
+                </select>
+
+                <br /><br />
+                <select id="selAcreage">
+                    <option value="">All Acreage</option>
+                </select>
+
+                <br /><br />
+                <input type="button" value="Apply" id="btnApply" />
+            </fieldset>
+        </div>
+        
         <div id='panel'></div>
         <h2>What do rainfall trends look like across the U.S. over the course of a year?</h2>
         <p>The United States has a wide array of climates and weather patterns. Part of this can be attributed to differences in latitude often primarily, but other things like the geographical features of a region play a large role as well. 
@@ -55,8 +78,8 @@
 		<!--put your external script links here-->
         <script src="js/jquery.js" type="text/javascript"></script>
         <script src="js/leaflet.js" type="text/javascript"></script>
-        <script src="data/rainfall.json"></script> <!-- link to GeoJSON file we want to load into map -->
+        <script src="data/US_Wildfires_Simplify.json"></script> <!-- link to GeoJSON file we want to load into map -->
         <script src="js/main.js"></script>
-		<script type="text/javascript" src="lib/bootstrap.min.js"></script>
+		<script src="lib/bootstrap.min.js" type="text/javascript"></script>
 	</body>
 </html>

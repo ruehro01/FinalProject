@@ -1,197 +1,287 @@
+///////////////////////////////////////////////////////////////////////
 //function to instantiate the Leaflet map
-function createMap(){
-    var map = L.map('map', {
-        center: [38,-95],
+var map;
+function createMap() {
+    map = L.map('map', {
+        center: [36, -105],
         zoom: 4,
-        minZoom:2,
-        maxZoom:18
+        minZoom: 2,
+        maxZoom: 18,
     });
 
-    L.tileLayer('https://api.maptiler.com/maps/topo/{z}/{x}/{y}.png?key=HgWcVD9zl0mqqWSOflrs', {
-        attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
-    }).addTo(map);
-        
+L.tileLayer('https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=HgWcVD9zl0mqqWSOflrs', { 
+        attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'})
+        .addTo(map);
     //call getData function
-    getData(map);
+    getData(map);    
 };
 
+//style polygons for display in map
+function polygonStyle(){
+    return {
+         fillColor: "#ffa500",
+            color: "#b84700",
+            weight: 0.8,
+            opacity: 1,
+            fillOpacity: 0.6   
+    }
+}
 
-function calcPropRadius(attValue) {
-    //scale factor to adjust symbol size evenly
-    var scaleFactor = 250;
-    //area based on attribute value and scale factor
-    var area = attValue * scaleFactor;
-    //radius calculated based on area
-    var radius = Math.sqrt(area/Math.PI);
-
-    return radius;
-};
-
-
-function pointToLayer(feature, latlng, attributes){
-    //Assign the current attribute based on the first index of the attributes array
-    var attribute = attributes[0];
-    //check
-    console.log(attribute);
-    //create marker options
-    var options = {
-        fillColor: "#8900ff",
-        color: "#000",
-        weight: 1,
-        opacity: 1,
-        fillOpacity: 0.8
-    };
-
-    //For each feature, determine its value for the selected attribute
-    var attValue = Number(feature.properties[attribute]);
-
-    //Give each feature's circle marker a radius based on its attribute value
-    options.radius = calcPropRadius(attValue);
-
-    //create circle marker layer
-    var layer = L.circleMarker(latlng, options);
-
-    var popupContent = "<p><b>City:</b> " + feature.properties.name + "</p>";
-
-    //add formatted attribute to popup content string
-    var month = attribute.split("_")[1];
-    popupContent += "<p><b>Rainfall in " + month + ":</b> " + feature.properties[attribute] + " inches</p>";
-
-    //bind the popup to the circle marker
-    layer.bindPopup(popupContent, {
-        offset: new L.Point(0,-options.radius),
-        closeButton: false 
-    });
-    //event listeners to open popup on hover and fill panel on click
-    layer.on({
-        mouseover: function(){
-            this.openPopup();
-        },
-        mouseout: function(){
-            this.closePopup();
-        }
-    });
-
-    //return the circle marker to the L.geoJson pointToLayer option
-    return layer;
-};
-
-function createPropSymbols(data, map, attributes){
+function createPropSymbols(data, map) {
     //create a Leaflet GeoJSON layer and add it to the map
     L.geoJson(data, {
-        pointToLayer: function(feature, latlng){
-            return pointToLayer(feature, latlng, attributes);
+        style: polygonStyle,
+        onEachFeature: onEachFeature,
+        pointToLayer: function (feature, latlng) {
+            return pointToLayer(feature, latlng);  
         }
     }).addTo(map);
 };
 
-function updatePropSymbols(map, attribute){
-    map.eachLayer(function(layer){
-        if (layer.feature && layer.feature.properties[attribute]){
-            //access feature properties
-            var props = layer.feature.properties;
+function onEachFeature(feature, layer) {
+    // does this feature have a property named popupContent?
+    if (feature.properties && feature.properties.State) {
+        //access feature properties
+        var props = layer.feature.properties;
 
-            //update each feature's radius based on new attribute values
-            var radius = calcPropRadius(props[attribute]);
-            layer.setRadius(radius);
+        //add state to popup content string
+        var popupContent = "<p><b>State:</b> " + props.State + "</p>";
+        popupContent += "<p><b>Fire name:</b> " + props.FIRE_NAME + "</p>";
+        popupContent += "<p><b>Date of ignition:</b> " + props.STARTMONTH + "/" + props.STARTDAY + "/" + props.YEAR + "</p>";
+        popupContent += "<p><b>Total acreage burned:</b> " + props.ACRES + " acres</p>";
 
-            //add city to popup content string
-            var popupContent = "<p><b>City:</b> " + props.name + "</p>";
+        layer.bindPopup(popupContent);
+    }
+}
 
-            //add formatted attribute to panel content string
-            var month = attribute.split("_")[1];
-            popupContent += "<p><b>Rainfall in " + month + ":</b> " + props[attribute] + " inches</p>";
-
-            //replace the layer popup
-            layer.bindPopup(popupContent, {
-                offset: new L.Point(0,-radius)
-            });
-        };
-    });
-};
-
-function createPopup(properties, attribute, layer, radius){
-    //add city to popup content string
-    var popupContent = "<p><b>City:</b> " + properties.name + "</p>";
-
-    //add formatted attribute to panel content string
-    var month = attribute.split("_")[1];
-    popupContent += "<p><b>Rainfall in " + month + ":</b> " + properties[attribute] + " inches</p>";
-
-    //replace the layer popup
-    layer.bindPopup(popupContent, {
-        offset: new L.Point(0,-radius)
-    });
-};    
-function createSequenceControls(map, attributes){
+function createSequenceControls(map) {
     //create slider
     $('#panel').append('<input class="range-slider" type="range">');
     $('#panel').append('<button class="skip" id="reverse">Reverse</button>');
     $('#panel').append('<button class="skip" id="forward">Skip</button>');
-       //Click listener for buttons
-    $('.skip').click(function(){
+    //Click listener for buttons
+    $('.skip').click(function () {
         //get the old index value
-        var index = $('.range-slider').val();
-        if ($(this).attr('id') == 'forward'){
-            index++;
+        currentDecadeValue = parseInt($('.range-slider').val());
+        if ($(this).attr('id') == 'forward') {
             //Part of slider loop
-            index = index > 11 ? 0 : index;
-            
-             updatePropSymbols(map, attributes[index]);
-        } else if ($(this).attr('id') == 'reverse'){
-            index--;
+            currentDecadeValue += 10;
+            currentDecadeValue = currentDecadeValue > maxDecade ? minDecade - 10 : currentDecadeValue;
+
+        } else if ($(this).attr('id') == 'reverse') {
             //Part of slider loop
-            index = index < 0 ? 11 : index;
-            
-            updatePropSymbols(map, attributes[index]);
-            
+            currentDecadeValue -= 10;
+            currentDecadeValue = currentDecadeValue < minDecade - 10 ? maxDecade : currentDecadeValue;
         };
 
-        $('.range-slider').val(index);
-        
+        if (currentDecadeValue === minDecade - 10) {
+            $('#selDecade').val("");
+        }
+        else {
+            $('#selDecade').val(currentDecadeValue.toString());
+        }
+
+        updatePropSymbols(map);
+
+        $('.range-slider').val(currentDecadeValue);
+
     });
 
     //set slider attributes
     $('.range-slider').attr({
-        max: 11,
-        min: 0,
-        value: 0,
-        step: 1
+        max: maxDecade,
+        min: minDecade - 10,
+        value: minDecade - 10,
+        step: 10
     });
 };
 
-function processData(data){
-    //empty array to hold attributes
-    var attributes = [];
+function updatePropSymbols(map) {
+    let object = getFilteredData();
+    createPropSymbols(object.filterData, map);
+}
 
-    //properties of the first feature in the dataset
-    var properties = data.features[0].properties;
+function getFilteredData() {
 
-    //push each attribute name into attributes array
-    for (var attribute in properties){
-        //only take attributes with population values
-        if (attribute.indexOf("Rain") > -1){
-            attributes.push(attribute);
-        };
-    };
+    map.eachLayer(function (layer) {
+        if (!layer._container)
+            map.removeLayer(layer);
+    });
 
-    //check result
-    console.log(attributes);
+    let state = $('#selState').val();
+    let decade = $('#selDecade').val();
+    let acreage = $('#selAcreage').val();
 
-    return attributes;
+    let returnObject = { filterData: [], Lat: '', Lng: '' };
+
+    for (let feature of jsonData.features) {
+        let property = feature.properties;
+        if (state === "" && decade === "" && acreage === "") {
+            returnObject.filterData.push(feature);
+            if (returnObject.Lat === '' && returnObject.Lng === '') {
+                returnObject.Lat = feature.geometry.coordinates[0][0][0];
+                returnObject.Lng = feature.geometry.coordinates[0][0][1];
+            }
+        }
+        else if (state !== "" && decade !== "" && acreage !== "") {
+            if (property['State'] === state && property['Decade'] === parseInt(decade) && property['ACRES'] >= parseInt(acreage)) {
+                returnObject.filterData.push(feature);
+                if (returnObject.Lat === '' && returnObject.Lng === '') {
+                    returnObject.Lat = feature.geometry.coordinates[0][0][0];
+                    returnObject.Lng = feature.geometry.coordinates[0][0][1];
+                }
+            }
+        }
+        else if (state !== "" && decade !== "") {
+            if (property['State'] === state && property['Decade'] === parseInt(decade)) {
+                returnObject.filterData.push(feature);
+                if (returnObject.Lat === '' && returnObject.Lng === '') {
+                    returnObject.Lat = feature.geometry.coordinates[0][0][0];
+                    returnObject.Lng = feature.geometry.coordinates[0][0][1];
+                }
+            }
+        }
+        else if (state !== "" && acreage !== "") {
+            if (property['State'] === state && property['ACRES'] >= parseInt(acreage)) {
+                returnObject.filterData.push(feature);
+                if (returnObject.Lat === '' && returnObject.Lng === '') {
+                    returnObject.Lat = feature.geometry.coordinates[0][0][0];
+                    returnObject.Lng = feature.geometry.coordinates[0][0][1];
+                }
+            }
+        }
+        else if (decade !== "" && acreage !== "") {
+            if (property['Decade'] === parseInt(decade) && property['ACRES'] >= parseInt(acreage)) {
+                returnObject.filterData.push(feature);
+                if (returnObject.Lat === '' && returnObject.Lng === '') {
+                    returnObject.Lat = feature.geometry.coordinates[0][0][0];
+                    returnObject.Lng = feature.geometry.coordinates[0][0][1];
+                }
+            }
+        }
+        else if (state !== "") {
+            if (property['State'] === state) {
+                returnObject.filterData.push(feature);
+                if (returnObject.Lat === '' && returnObject.Lng === '') {
+                    returnObject.Lat = feature.geometry.coordinates[0][0][0];
+                    returnObject.Lng = feature.geometry.coordinates[0][0][1];
+                }
+            }
+        }
+        else if (decade !== "") {
+            if (property['Decade'] === parseInt(decade)) {
+                returnObject.filterData.push(feature);
+                if (returnObject.Lat === '' && returnObject.Lng === '') {
+                    returnObject.Lat = feature.geometry.coordinates[0][0][0];
+                    returnObject.Lng = feature.geometry.coordinates[0][0][1];
+                }
+            }
+        }
+        else if (acreage !== "") {
+            if (property['ACRES'] >= parseInt(acreage)) {
+                returnObject.filterData.push(feature);
+                if (returnObject.Lat === '' && returnObject.Lng === '') {
+                    returnObject.Lat = feature.geometry.coordinates[0][0][0];
+                    returnObject.Lng = feature.geometry.coordinates[0][0][1];
+                }
+            }
+        }
+    }
+
+    return returnObject;
+}
+
+var decades = [];
+var currentDecadeValue = 0;
+var minDecade = 0;
+var maxDecade = 0;
+
+function processData(data) {
+    //populate the dropdownlist
+    let states = [];
+    for (let feature of data.features) {
+        let property = feature.properties;
+        states.push(property['State']);
+    }
+
+    // make states array unique
+    states = Array.from(new Set(states));
+
+    $('#selState').empty();
+    $('#selState').append($('<option></option>').val('').html('All States'));
+    $.each(states, function (i, p) {
+        $('#selState').append($('<option></option>').val(p).html(p));
+    });
+
+    // populate the decade field
+
+    decades = [];
+    for (let feature of jsonData.features) {
+        let property = feature.properties;
+        decades.push(property['Decade']);
+    }
+
+    // make decade array unique
+    decades = Array.from(new Set(decades));
+    decades.sort();
+
+    maxDecade = Math.max(...decades);
+    minDecade = Math.min(...decades);
+
+    $('#selDecade').empty();
+    $('#selDecade').append($('<option></option>').val('').html('All Decades'));
+    $.each(decades, function (i, p) {
+        $('#selDecade').append($('<option></option>').val(p).html(p));
+    });
+
+    currentDecadeValue = parseInt($('#selDecade').val())
+
+    // Populate acreage dropdown
+    let acreages = [];
+    for (let feature of jsonData.features) {
+        let property = feature.properties;
+        acreages.push(parseInt(property['ACRES']));
+    }
+
+    // make acreages array unique
+    acreages = Array.from(new Set(acreages));
+    acreages.sort((a, b) => a - b);
+
+    let acreageRanges = [];
+    for (let i = 0; i < acreages.length - 1; i += 1000) {
+        acreageRanges.push(acreages[i])
+    }
+
+    $('#selAcreage').empty();
+    $('#selAcreage').append($('<option></option>').val('').html('All Acreage'));
+    $.each(acreageRanges, function (i, p) {
+        $('#selAcreage').append($('<option></option>').val(p).html(`> ${p.toLocaleString()} acres.`));
+    });
 };
 
+////////////////////////////////////////////
+//// Update the map on the basis of filters
+$('#btnApply').click(function () {
+    let object = getFilteredData();
+    createPropSymbols(object.filterData, map);
+    map.flyTo(new L.LatLng(object.Lng, object.Lat), 6);
+});
+
+////////////////////////////////////////////////////
 //Import GeoJSON data
-function getData(map){
+var jsonData;
+
+function getData(map) {
     //load the data
-    $.ajax("data/rainfall.json", {
+    $.ajax("data/US_Wildfires_Simplify.json", {
         dataType: "json",
-        success: function(response){
+        success: function (response) {
+            jsonData = response;
             //create an attributes array
-            var attributes = processData(response);
-            
-            createPropSymbols(response, map, attributes);
-            createSequenceControls(map, attributes);
+            processData(response);
+
+            createPropSymbols(response, map);
+            createSequenceControls(map);
         }
     });
 };
