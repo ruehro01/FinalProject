@@ -99,13 +99,23 @@ function createMap() {
     });
 
     map.addControl(searchControl);  //inizialize search control
+    
+    //create legend in bottom right corner of map    
+    var legend = L.control({ position: "bottomright" });
 
+    legend.onAdd = function(map) {
+      var div = L.DomUtil.create("div", "legend");
+      div.innerHTML += "<h4>Legend</h4>";
+      div.innerHTML += '<i style="background: #ffa500"></i><span>Wildfire footprint</span><br>';
 
+      return div;
+    };
 
-    //call getData function
-    getData(map);
-};
+    legend.addTo(map);
 
+        //call getData function
+        getData(map);
+    };
 
 
 //style polygons for display in map
@@ -114,8 +124,8 @@ function polygonStyle() {
         fillColor: "#ffa500",
         color: "#b84700",
         weight: 0.8,
-        opacity: 1,
-        fillOpacity: 0.6
+        opacity: 0.2,
+        fillOpacity: 0.5
     }
 }
 
@@ -360,7 +370,7 @@ function processData(data) {
 $('#btnApply').click(function () {
     let object = getFilteredData();
     createPropSymbols(object.filterData, map);
-    map.flyTo(new L.LatLng(object.Lng, object.Lat), 4);
+    map.flyTo(new L.LatLng(object.Lng, object.Lat), 5);
 });
 
 $('#btnReset').click(function () {

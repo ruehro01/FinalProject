@@ -38,36 +38,6 @@
   color: #242424;
 }
 
-/*** Portfolio pieces ***/
-.portfolio-thumbnail {
-  background-color: white;
-  border-color: #b84700;
-  border-width: 2px;
-  width: 95%;
-}
-
-.portfolio-thumbnail:hover {
-  border-color: #ebd122;
-}
-
-.portfolio-title {
-  font-weight: bold;
-}
-
-.portfolio-description {
-}
-
-.portfolio-image {
-}
-
-#about-world {
-  max-height: 200px;
-}
-
-.resume h3 {
-  font-weight: bold;
-}
-
 hr {
   border-color: #000000;
   border-width: 2px;
@@ -127,12 +97,37 @@ html, body {
     font: bold 18px 'Lucida Console', Monaco, monospace;
 }
 
+.legend {
+  padding: 6px 8px;
+  font: 14px Arial, Helvetica, sans-serif;
+  background: white;
+  background: rgba(255, 255, 255, 0.8);
+  line-height: 24px;
+  color: #555;
+}
+.legend h4 {
+  text-align: center;
+  font-size: 16px;
+  margin: 2px 12px 8px;
+  color: #777;
+}
 
-#fires {
-    color: "#b84700";
-    outline-color: "#000";
-    outline-width: medium;
-    opacity: 1;
+.legend span {
+  position: relative;
+  bottom: 3px;
+}
+
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin: 0 8px 0 0;
+  opacity: 0.7;
+}
+
+.legend i.icon {
+  background-size: 18px;
+  background-color: rgba(255, 255, 255, 1);
 }
 
 #map {
@@ -157,6 +152,7 @@ html, body {
     float: left;
     margin-left: 1%;
     width: 18%;
+    padding-top: 3%;
 }
 
     #dropdown select {
