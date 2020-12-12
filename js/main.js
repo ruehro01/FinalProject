@@ -1,4 +1,13 @@
 ///////////////////////////////////////////////////////////////////////
+
+
+
+var satellite = L.tileLayer('https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=HgWcVD9zl0mqqWSOflrs', {id: 'MapID', tileSize: 512, zoomOffset: -1, 
+        attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'}),
+    
+    topo = L.tileLayer('https://api.maptiler.com/maps/topo/{z}/{x}/{y}.png?key=HgWcVD9zl0mqqWSOflrs', {id: 'MapID', tileSize: 512, zoomOffset: -1,
+        attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'});
+
 //function to instantiate the Leaflet map
 var map;
 function createMap() {
@@ -7,14 +16,35 @@ function createMap() {
         zoom: 4,
         minZoom: 2,
         maxZoom: 18,
+        zoomControl: false,
+        layers: [topo, satellite]
     });
+    
+    //create panning buttons in top right corner of map
+    var panControl = L.control.pan({position: 'topright'});
+    
+        panControl.addTo(map);
+    
+    //create zoom and home buttons in top right corner of map
+    var zoomHome = L.Control.zoomHome({position: 'topright'});
+    L.Control.zoomHome({
+        center: [36, -105],
+        zoom: 4,
+        minZoom: 2,
+        maxZoom: 18,
+    })
+    zoomHome.addTo(map);
+    
+    //create dynamic scale bars in bottom right corner of map
+    var scale = L.control.scale({position: 'bottomleft'});
+        scale.addTo(map); 
 
-L.tileLayer('https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=HgWcVD9zl0mqqWSOflrs', { 
-        attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'})
-        .addTo(map);
+        
     //call getData function
     getData(map);    
 };
+
+
 
 //style polygons for display in map
 function polygonStyle(){
@@ -58,7 +88,7 @@ function createSequenceControls(map) {
     //create slider
     $('#panel').append('<input class="range-slider" type="range">');
     $('#panel').append('<button class="skip" id="reverse">Reverse</button>');
-    $('#panel').append('<button class="skip" id="forward">Skip</button>');
+    $('#panel').append('<button class="skip" id="forward">Forward</button>');
     //Click listener for buttons
     $('.skip').click(function () {
         //get the old index value
@@ -99,6 +129,10 @@ function createSequenceControls(map) {
 function updatePropSymbols(map) {
     let object = getFilteredData();
     createPropSymbols(object.filterData, map);
+}
+
+function updateBasemap(map) {
+    
 }
 
 function getFilteredData() {
@@ -264,8 +298,14 @@ function processData(data) {
 $('#btnApply').click(function () {
     let object = getFilteredData();
     createPropSymbols(object.filterData, map);
-    map.flyTo(new L.LatLng(object.Lng, object.Lat), 6);
+    map.flyTo(new L.LatLng(object.Lng, object.Lat), 4);
 });
+
+/*  $('#btnReset').click(function () {
+    let object = getFilteredData();
+    updatePropSymbols(object.filterData, map);
+    map.flyTo(new L.LatLng(36, -105), 4);
+}); */
 
 ////////////////////////////////////////////////////
 //Import GeoJSON data

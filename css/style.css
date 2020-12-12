@@ -8,6 +8,7 @@
 /* Navbar title */
 .navbar-default .navbar-brand {
   color: #000000;
+  
   font-size: 20px;
   font-weight: bold;
 }
@@ -92,7 +93,8 @@ a:hover {
 .jumbotron {
   text-align: center;
   color: #fff;
-  padding: %;
+  padding-top: %;
+  padding-bottom: 0%;
 }
 
 .jumbotron h2 {
@@ -112,17 +114,38 @@ html, body {
     margin: 0.2em 0;
 }
 
+.leaflet-bar a { 
+    background-color: #fff; 
+    border-bottom: 1px solid #ccc; 
+    color: #444; 
+    display: block; 
+    height: 26px; 
+    width: 26px; 
+    line-height: 1.45 !important; 
+    text-align: center; 
+    text-decoration: none; 
+    font: bold 18px 'Lucida Console', Monaco, monospace;
+}
+
+
 #fires {
-    color: "#8900ff";
+    color: "#b84700";
     outline-color: "#000";
     outline-width: medium;
     opacity: 1;
 }
 
 #map {
-    height: 80%;
+    height: 70%;
     width: 80%;
+    padding-left: 1%;
     float: left;
+}
+
+#selector {
+    float: left;
+    margin-left: 1%;
+    width: 18%;
 }
 
 #dropdown {
@@ -133,25 +156,47 @@ html, body {
 
     #dropdown select {
         width: 100%;
+        outline-color: #000
     }
 
     #dropdown fieldset {
-        border-color: #ccc;
+        border-color: #000;
     }
 
 #panel {
     width: 80%;
+    padding-left: 1%;
+    padding-right: 1%;
+    color: #b84700;
+    font: bold;
     clear: both;
 }
 
+    #panel #labels {
+        display: flex;
+        justify-content: space-between;
+
+    }
+
     #panel .range-slider {
-        width: 90%;
+        width: 100%;
+        margin: auto;
     }
 
     #panel #reverse {
         float: left;
+        font: bold;
+        color: #000;
     }
 
     #panel #forward {
         float: right;
+        font: bold;
+        color: #000;
     }
+
+#info {
+    padding-left: 2%;
+    padding-right: 20%;
+    padding-bottom: 2%;
+}
