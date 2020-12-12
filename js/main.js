@@ -1,13 +1,4 @@
 ///////////////////////////////////////////////////////////////////////
-
-
-
-var satellite = L.tileLayer('https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=HgWcVD9zl0mqqWSOflrs', {id: 'MapID', tileSize: 512, zoomOffset: -1, 
-        attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'}),
-    
-    topo = L.tileLayer('https://api.maptiler.com/maps/topo/{z}/{x}/{y}.png?key=HgWcVD9zl0mqqWSOflrs', {id: 'MapID', tileSize: 512, zoomOffset: -1,
-        attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'});
-
 //function to instantiate the Leaflet map
 var map;
 function createMap() {
@@ -17,7 +8,44 @@ function createMap() {
         minZoom: 2,
         maxZoom: 18,
         zoomControl: false,
-        layers: [topo, satellite]
+    });
+    
+  var layer = L.esri.basemapLayer('Topographic').addTo(map);
+  var layerLabels;
+
+  function setBasemap (basemap) {
+    if (layer) {
+      map.removeLayer(layer);
+    }
+
+    layer = L.esri.basemapLayer(basemap);
+
+    map.addLayer(layer);
+
+    if (layerLabels) {
+      map.removeLayer(layerLabels);
+    }
+
+    if (
+      basemap === 'ShadedRelief' ||
+      basemap === 'Oceans' ||
+      basemap === 'Gray' ||
+      basemap === 'DarkGray' ||
+      basemap === 'Terrain'
+    ) {
+      layerLabels = L.esri.basemapLayer(basemap + 'Labels');
+      map.addLayer(layerLabels);
+    } else if (basemap.includes('Imagery')) {
+      layerLabels = L.esri.basemapLayer('ImageryLabels');
+      map.addLayer(layerLabels);
+    }
+  }
+
+  document
+    .querySelector('#basemaps')
+    .addEventListener('change', function (e) {
+      var basemap = e.target.value;
+      setBasemap(basemap);
     });
     
     //create panning buttons in top right corner of map
@@ -38,7 +66,38 @@ function createMap() {
     //create dynamic scale bars in bottom right corner of map
     var scale = L.control.scale({position: 'bottomleft'});
         scale.addTo(map); 
+    //create search bar in top left corner of map where user may search by state name
+    var searchControl = new L.Control.Search({
+		layer: jsonData,
+		propertyName: 'State',
+		marker: false,
+		moveToLocation: function(latlng, title, map) {
+			//map.fitBounds( latlng.layer.getBounds() );
+			var zoom = map.getBoundsZoom(latlng.layer.getBounds());
+  			map.setView(latlng, zoom); // access the zoom
+		}
+	});
 
+	searchControl.on('search:locationfound', function(e) {
+		
+		//console.log('search:locationfound', );
+
+		//map.removeLayer(this._markerSearch)
+
+		e.layer.setStyle({fillColor: '#3f0', color: '#0f0'});
+		if(e.layer._popup)
+			e.layer.openPopup();
+
+	}).on('search:collapsed', function(e) {
+
+		jsonData.eachLayer(function(layer) {	//restore feature color
+			jsonData.resetStyle(layer);
+		});	
+	});
+	
+	map.addControl( searchControl );  //inizialize search control
+
+    
         
     //call getData function
     getData(map);    

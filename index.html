@@ -13,6 +13,7 @@
 		<link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/leaflet.zoomhome.css"/> <!--leaflet plugin from Github -->
         <link rel="stylesheet" href="css/L.Control.Pan.css"/> <!--leaflet plugin from Github -->
+        <link rel="stylesheet" href="css/leaflet-search.css"/> <!--leaflet plugin from Github -->
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
         <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" type="text/css" rel="stylesheet"> <!-- from Google fonts -->
 
@@ -49,17 +50,34 @@
 		</div>
 
         
-        <div id='map'>
+        <div id='map'></div>
+        
+        <div id="basemaps-dropdown">
+            <legend><b>Select Basemap</b></legend>
+            <select id="basemaps">
+                <option value="Topographic">Topographic</option>
+                <option value="Streets">Streets</option>
+                <option value="NationalGeographic">National Geographic</option>
+                <option value="Oceans">Oceans</option>
+                <option value="Gray">Gray</option>
+                <option value="DarkGray">Dark Gray</option>
+                <option value="Imagery">Imagery</option>
+                <option value="ImageryClarity">Imagery (Clarity)</option>
+                <option value="ImageryFirefly">Imagery (Firefly)</option>
+                <option value="ShadedRelief">Shaded Relief</option>
+                <option value="Physical">Physical</option>
+                <br/><br/><br/><br/>
+            </select>
         </div>
         
-        <div id="selector">
+<!--        <div id="selector">
             <legend><b>Select Basemap</b></legend>
             <input type="radio" id="satellite" name="mapType" value="satellite" checked>
             <label for="satellite">Satellite</label><br>
             <input type="radio" id="topo" name="mapType" value="topo">
             <label for="topo">Topographic</label><br>
             <br/><br/>
-        </div>
+        </div>  -->
         
         <div id="dropdown">
             <fieldset>
@@ -109,8 +127,10 @@
         <script src="js/leaflet.js" type="text/javascript"></script>
         <script src="data/US_Wildfires_Simplify.json"></script> <!-- link to GeoJSON file we want to load into map -->
         <script src="js/main.js"></script>
+        <script src="js/plugins/esri-leaflet.js"></script>
         <script src="js/plugins/leaflet.zoomhome.min.js"></script> <!-- link to Zoom/Home button plugin -->
         <script src="js/plugins/L.Control.Pan.js"></script> <!-- link to pan plugin -->
+        <script src="js/plugins/leaflet-search.js"></script> <!-- link to search bar plugin -->
 		<script src="lib/bootstrap.min.js" type="text/javascript"></script>
 	</body>
 </html>

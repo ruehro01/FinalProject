@@ -142,6 +142,17 @@ html, body {
     float: left;
 }
 
+#basemaps-dropdown {
+    float: left;
+    margin-left: 1%;
+    width: 18%;
+    height: 10%;
+}
+#basemaps {
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+
 #selector {
     float: left;
     margin-left: 1%;
