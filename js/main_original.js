@@ -9,53 +9,53 @@ function createMap() {
         maxZoom: 18,
         zoomControl: false,
     });
-
+    
     //configure basemap selector
     var layer = L.esri.basemapLayer('Topographic').addTo(map);
     var layerLabels;
 
-    function setBasemap(basemap) {
-        if (layer) {
-            map.removeLayer(layer);
-        }
+    function setBasemap (basemap) {
+    if (layer) {
+      map.removeLayer(layer);
+    }
 
-        layer = L.esri.basemapLayer(basemap);
+    layer = L.esri.basemapLayer(basemap);
 
-        map.addLayer(layer);
+    map.addLayer(layer);
 
-        if (layerLabels) {
-            map.removeLayer(layerLabels);
-        }
+    if (layerLabels) {
+      map.removeLayer(layerLabels);
+    }
 
-        if (
-            basemap === 'ShadedRelief' ||
-            basemap === 'Oceans' ||
-            basemap === 'Gray' ||
-            basemap === 'DarkGray' ||
-            basemap === 'Terrain'
-        ) {
-            layerLabels = L.esri.basemapLayer(basemap + 'Labels');
-            map.addLayer(layerLabels);
-        } else if (basemap.includes('Imagery')) {
-            layerLabels = L.esri.basemapLayer('ImageryLabels');
-            map.addLayer(layerLabels);
-        }
+    if (
+      basemap === 'ShadedRelief' ||
+      basemap === 'Oceans' ||
+      basemap === 'Gray' ||
+      basemap === 'DarkGray' ||
+      basemap === 'Terrain'
+    ) {
+      layerLabels = L.esri.basemapLayer(basemap + 'Labels');
+      map.addLayer(layerLabels);
+    } else if (basemap.includes('Imagery')) {
+      layerLabels = L.esri.basemapLayer('ImageryLabels');
+      map.addLayer(layerLabels);
+    }
     }
 
     document
-        .querySelector('#basemaps')
-        .addEventListener('change', function (e) {
-            var basemap = e.target.value;
-            setBasemap(basemap);
-        });
-
+    .querySelector('#basemaps')
+    .addEventListener('change', function (e) {
+      var basemap = e.target.value;
+      setBasemap(basemap);
+    });
+    
     //create panning buttons in top right corner of map
-    var panControl = L.control.pan({ position: 'topright' });
-
-    panControl.addTo(map);
-
+    var panControl = L.control.pan({position: 'topright'});
+    
+        panControl.addTo(map);
+    
     //create zoom and home buttons in top right corner of map
-    var zoomHome = L.Control.zoomHome({ position: 'topright' });
+    var zoomHome = L.Control.zoomHome({position: 'topright'});
     L.Control.zoomHome({
         center: [36, -105],
         zoom: 4,
@@ -63,59 +63,59 @@ function createMap() {
         maxZoom: 18,
     })
     zoomHome.addTo(map);
-
+    
     //create dynamic scale bars in bottom right corner of map
-    var scale = L.control.scale({ position: 'bottomleft' });
-    scale.addTo(map);
-
-
+    var scale = L.control.scale({position: 'bottomleft'});
+        scale.addTo(map); 
+    
+    
     //create search bar in top left corner of map where user may search by state name
     var searchControl = new L.Control.Search({
-        layer: jsonData,
-        propertyName: 'State',
-        marker: false,
-        moveToLocation: function (latlng, title, map) {
-            //map.fitBounds( latlng.layer.getBounds() );
-            var zoom = map.getBoundsZoom(latlng.layer.getBounds());
-            map.setView(latlng, zoom); // access the zoom
-        }
-    });
+		layer: jsonData,
+		propertyName: 'State',
+		marker: false,
+		moveToLocation: function(latlng, title, map) {
+			//map.fitBounds( latlng.layer.getBounds() );
+			var zoom = map.getBoundsZoom(latlng.layer.getBounds());
+  			map.setView(latlng, zoom); // access the zoom
+		}
+	});
 
-    searchControl.on('search:locationfound', function (e) {
+	searchControl.on('search:locationfound', function(e) {
+		
+		//console.log('search:locationfound', );
 
-        //console.log('search:locationfound', );
+		//map.removeLayer(this._markerSearch)
 
-        //map.removeLayer(this._markerSearch)
+		e.layer.setStyle({fillColor: '#3f0', color: '#0f0'});
+		if(e.layer._popup)
+			e.layer.openPopup();
 
-        e.layer.setStyle({ fillColor: '#3f0', color: '#0f0' });
-        if (e.layer._popup)
-            e.layer.openPopup();
+	}).on('search:collapsed', function(e) {
 
-    }).on('search:collapsed', function (e) {
+		jsonData.eachLayer(function(layer) {	//restore feature color
+			jsonData.resetStyle(layer);
+		});	
+	});
+	
+	map.addControl( searchControl );  //inizialize search control
 
-        jsonData.eachLayer(function (layer) {	//restore feature color
-            jsonData.resetStyle(layer);
-        });
-    });
-
-    map.addControl(searchControl);  //inizialize search control
-
-
-
+    
+        
     //call getData function
-    getData(map);
+    getData(map);    
 };
 
 
 
 //style polygons for display in map
-function polygonStyle() {
+function polygonStyle(){
     return {
-        fillColor: "#ffa500",
-        color: "#b84700",
-        weight: 0.8,
-        opacity: 1,
-        fillOpacity: 0.6
+         fillColor: "#ffa500",
+            color: "#b84700",
+            weight: 0.8,
+            opacity: 1,
+            fillOpacity: 0.6   
     }
 }
 
@@ -125,7 +125,7 @@ function createPropSymbols(data, map) {
         style: polygonStyle,
         onEachFeature: onEachFeature,
         pointToLayer: function (feature, latlng) {
-            return pointToLayer(feature, latlng);
+            return pointToLayer(feature, latlng);  
         }
     }).addTo(map);
 };
@@ -194,7 +194,7 @@ function updatePropSymbols(map) {
 }
 
 function updateBasemap(map) {
-
+    
 }
 
 function getFilteredData() {
@@ -363,10 +363,11 @@ $('#btnApply').click(function () {
     map.flyTo(new L.LatLng(object.Lng, object.Lat), 4);
 });
 
-$('#btnReset').click(function () {
-    getData(map);
+/*  $('#btnReset').click(function () {
+    let object = getFilteredData();
+    updatePropSymbols(object.filterData, map);
     map.flyTo(new L.LatLng(36, -105), 4);
-});
+}); */
 
 ////////////////////////////////////////////////////
 //Import GeoJSON data
