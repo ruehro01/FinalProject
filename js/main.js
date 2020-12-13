@@ -379,12 +379,12 @@ function getData(map) {
                 propertyName: 'FIRE_NAME',
                 marker: false,
                 moveToLocation: function (latlng, title, map) {
-                    map.setView(latlng, 4); // access the zoom
+                    map.setView(latlng, 8); // access the zoom
                 }
             });
 
             searchControl.on('search:locationfound', function (e) {
-                e.layer.setStyle({ fillColor: '#3f0', color: '#0f0' });
+                e.layer.setStyle({ fillColor: "#ffa500", color: '#0f0', weight: 2 });
                 if (e.layer._popup)
                     e.layer.openPopup();
 
