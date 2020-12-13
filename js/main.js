@@ -68,6 +68,19 @@ function createMap() {
     var scale = L.control.scale({ position: 'bottomleft' });
     scale.addTo(map);
 
+     //create legend in bottom right corner of map    
+    var legend = L.control({ position: "bottomright" });
+
+    legend.onAdd = function(map) {
+      var div = L.DomUtil.create("div", "legend");
+      div.innerHTML += "<h4>Legend</h4>";
+      div.innerHTML += '<i style="background: #ffa500"></i><span>Wildfire footprint</span><br>';
+
+      return div;
+    };
+
+    legend.addTo(map);
+    
     //call getData function
     getData(map);
 };
@@ -157,10 +170,6 @@ function createSequenceControls(map) {
 function updatePropSymbols(map) {
     let object = getFilteredData();
     createPropSymbols(object.filterData, map);
-}
-
-function updateBasemap(map) {
-
 }
 
 function getFilteredData() {
@@ -326,7 +335,7 @@ function processData(data) {
 $('#btnApply').click(function () {
     let object = getFilteredData();
     createPropSymbols(object.filterData, map);
-    map.flyTo(new L.LatLng(object.Lng, object.Lat), 4);
+    map.flyTo(new L.LatLng(object.Lng, object.Lat), 5);
 });
 
 $('#btnReset').click(function () {
@@ -367,21 +376,14 @@ function getData(map) {
             //create search bar in top left corner of map where user may search by state name
             var searchControl = new L.Control.Search({
                 layer: featuresLayer,
-                propertyName: 'State',
+                propertyName: 'FIRE_NAME',
                 marker: false,
                 moveToLocation: function (latlng, title, map) {
-                    //map.fitBounds( latlng.layer.getBounds() );
-                    //var zoom = map.getBoundsZoom(latlng.layer.getBounds());
                     map.setView(latlng, 4); // access the zoom
                 }
             });
 
             searchControl.on('search:locationfound', function (e) {
-
-                //console.log('search:locationfound', );
-
-                //map.removeLayer(this._markerSearch)
-
                 e.layer.setStyle({ fillColor: '#3f0', color: '#0f0' });
                 if (e.layer._popup)
                     e.layer.openPopup();
