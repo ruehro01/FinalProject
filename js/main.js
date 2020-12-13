@@ -3,7 +3,7 @@
 var map, featuresLayer;
 function createMap() {
     map = L.map('map', {
-        center: [36, -105],
+        center: [39, -105],
         zoom: 4,
         minZoom: 2,
         maxZoom: 18,
@@ -57,7 +57,7 @@ function createMap() {
     //create zoom and home buttons in top right corner of map
     var zoomHome = L.Control.zoomHome({ position: 'topright' });
     L.Control.zoomHome({
-        center: [36, -105],
+        center: [39, -105],
         zoom: 4,
         minZoom: 2,
         maxZoom: 18,
@@ -350,7 +350,7 @@ $('#btnReset').click(function () {
             createPropSymbols(response, map);
         }
     });
-    map.flyTo(new L.LatLng(36, -105), 4);
+    map.flyTo(new L.LatLng(39, -105), 4);
     $('#searchtext9').val('');
     $('.range-slider').val('1970');
 
