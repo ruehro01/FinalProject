@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////
 //function to instantiate the Leaflet map
-var map;
+var map, featuresLayer;
 function createMap() {
     map = L.map('map', {
         center: [36, -105],
@@ -68,54 +68,10 @@ function createMap() {
     var scale = L.control.scale({ position: 'bottomleft' });
     scale.addTo(map);
 
+    //call getData function
+    getData(map);
+};
 
-    //create search bar in top left corner of map where user may search by state name
-    var searchControl = new L.Control.Search({
-        layer: jsonData,
-        propertyName: 'State',
-        marker: false,
-        moveToLocation: function (latlng, title, map) {
-            //map.fitBounds( latlng.layer.getBounds() );
-            var zoom = map.getBoundsZoom(latlng.layer.getBounds());
-            map.setView(latlng, zoom); // access the zoom
-        }
-    });
-
-    searchControl.on('search:locationfound', function (e) {
-
-        //console.log('search:locationfound', );
-
-        //map.removeLayer(this._markerSearch)
-
-        e.layer.setStyle({ fillColor: '#3f0', color: '#0f0' });
-        if (e.layer._popup)
-            e.layer.openPopup();
-
-    }).on('search:collapsed', function (e) {
-
-        jsonData.eachLayer(function (layer) {	//restore feature color
-            jsonData.resetStyle(layer);
-        });
-    });
-
-    map.addControl(searchControl);  //inizialize search control
-    
-    //create legend in bottom right corner of map    
-    var legend = L.control({ position: "bottomright" });
-
-    legend.onAdd = function(map) {
-      var div = L.DomUtil.create("div", "legend");
-      div.innerHTML += "<h4>Legend</h4>";
-      div.innerHTML += '<i style="background: #ffa500"></i><span>Wildfire footprint</span><br>';
-
-      return div;
-    };
-
-    legend.addTo(map);
-
-        //call getData function
-        getData(map);
-    };
 
 
 //style polygons for display in map
@@ -124,14 +80,14 @@ function polygonStyle() {
         fillColor: "#ffa500",
         color: "#b84700",
         weight: 0.8,
-        opacity: 0.2,
-        fillOpacity: 0.5
+        opacity: 1,
+        fillOpacity: 0.6
     }
 }
 
 function createPropSymbols(data, map) {
     //create a Leaflet GeoJSON layer and add it to the map
-    L.geoJson(data, {
+    featuresLayer = new L.geoJson(data, {
         style: polygonStyle,
         onEachFeature: onEachFeature,
         pointToLayer: function (feature, latlng) {
@@ -370,12 +326,25 @@ function processData(data) {
 $('#btnApply').click(function () {
     let object = getFilteredData();
     createPropSymbols(object.filterData, map);
-    map.flyTo(new L.LatLng(object.Lng, object.Lat), 5);
+    map.flyTo(new L.LatLng(object.Lng, object.Lat), 4);
 });
 
 $('#btnReset').click(function () {
-    getData(map);
+    $.ajax("data/US_Wildfires_Simplify.json", {
+        dataType: "json",
+        success: function (response) {
+            jsonData = response;
+            $('#selState').val('');
+            $('#selDecade').val('');
+            $('#selAcreage').val('');
+
+            createPropSymbols(response, map);
+        }
+    });
     map.flyTo(new L.LatLng(36, -105), 4);
+    $('#searchtext9').val('');
+    $('.range-slider').val('1970');
+
 });
 
 ////////////////////////////////////////////////////
@@ -393,6 +362,38 @@ function getData(map) {
 
             createPropSymbols(response, map);
             createSequenceControls(map);
+
+            ///////////////////////////////////////////////////////////
+            //create search bar in top left corner of map where user may search by state name
+            var searchControl = new L.Control.Search({
+                layer: featuresLayer,
+                propertyName: 'State',
+                marker: false,
+                moveToLocation: function (latlng, title, map) {
+                    //map.fitBounds( latlng.layer.getBounds() );
+                    //var zoom = map.getBoundsZoom(latlng.layer.getBounds());
+                    map.setView(latlng, 4); // access the zoom
+                }
+            });
+
+            searchControl.on('search:locationfound', function (e) {
+
+                //console.log('search:locationfound', );
+
+                //map.removeLayer(this._markerSearch)
+
+                e.layer.setStyle({ fillColor: '#3f0', color: '#0f0' });
+                if (e.layer._popup)
+                    e.layer.openPopup();
+
+            }).on('search:collapsed', function (e) {
+
+                featuresLayer.eachLayer(function (layer) {	//restore feature color
+                    featuresLayer.resetStyle(layer);
+                });
+            });
+
+            map.addControl(searchControl);  //inizialize search control
         }
     });
 };
